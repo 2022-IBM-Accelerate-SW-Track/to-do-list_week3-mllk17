@@ -74,17 +74,19 @@ afterEach(() => {
   const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
   const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
   const element = screen.getByRole('button', {name: /Add/i});
-  const checkbox = screen.getByRole('checkbox');
-  const dueDate = "05/30/2023";
+  const dueDate = "05/30/2021";
   fireEvent.change(inputTask, { target: { value: "History Test"}});
   fireEvent.change(inputDate, { target: { value: dueDate}});
   fireEvent.click(element);
+  const checkbox = screen.getByRole('checkbox');
   fireEvent.click(checkbox);
   /*const check = screen.getByText(/History Test/i);
   const checkDate = screen.getByText(new RegExp(dueDate, "i"));
   expect(check).toBeInTheDocument();
   expect(checkDate).toBeInTheDocument();
   */
+  const gone = screen.getByText(/You have no todo's left/i);
+  expect(gone).toBeInTheDocument;
  });
 
 
@@ -97,12 +99,13 @@ afterEach(() => {
   fireEvent.change(inputTask, { target: { value: "History Test"}});
   fireEvent.change(inputDate, { target: { value: dueDate}});
   fireEvent.click(element);
-  const check = screen.getByText(/History Test/i);
-  const checkDate = screen.getByText(new RegExp(dueDate, "i"));
-  const historyCheck = screen.getByTestId(/HistoryTest/i).style.background;
-  const dueColor = "#a5aee3"
-  expect(check).toBeInTheDocument();
-  expect(checkDate).toBeInTheDocument();
+  //const check = screen.getByText(/History Test/i);
+  //const checkDate = screen.getByText(new RegExp(dueDate, "i"));
+  const historyCheck = screen.getByTestId(/History Test/i).style.background;
+  const dueColor = "rgb(165, 174, 227)"
+  //expect(check).toBeInTheDocument();
+  //expect(checkDate).toBeInTheDocument();
   expect(historyCheck).toBe(dueColor);
+  //expect(dueColor).toBeInTheDocument();
  });
  
